@@ -5,6 +5,7 @@
   import '../app.css';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import { authSession } from '$lib/stores/auth.js';
+  import { kecamatanList } from '$lib/stores/kecamatan.js';
 
   let { children } = $props();
 
@@ -21,6 +22,23 @@
 
     if ($authSession && isLoginPage) {
       goto('/');
+    }
+  });
+
+  $effect(() => {
+    if (!browser) return;
+
+    // Load custom local data if present
+    const stored = localStorage.getItem('rio_custom_kecamatan');
+    if (stored) {
+      try {
+        const customList = JSON.parse(stored);
+        if (customList.length > 0) {
+          kecamatanList.set(customList);
+        }
+      } catch (e) {
+        console.error('Gagal memuat data lokal kustom:', e);
+      }
     }
   });
 </script>

@@ -72,6 +72,19 @@
       <span>Dashboard</span>
     </a>
 
+    {#if session && (session.role === 'admin' || session.role === 'super_admin')}
+      <div class="sidebar__section-title">Manajemen</div>
+      <a
+        href="/admin/input"
+        class="sidebar__link"
+        class:active={currentPath === '/admin/input'}
+        onclick={closeMobile}
+      >
+        <Database size={16} />
+        <span>Kelola Data Potensi</span>
+      </a>
+    {/if}
+
     <div class="sidebar__section-title">Sumber</div>
     <div class="sidebar__source">
       <Database size={15} />
