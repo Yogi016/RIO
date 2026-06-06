@@ -1,9 +1,12 @@
 import { writable, derived } from 'svelte/store';
-import data from '$lib/data/kecamatan.json';
 import { calculateTotal } from '$lib/utils/formatters.js';
 
-/** @type {import('svelte/store').Writable<Array>} */
-export const kecamatanList = writable(data.kecamatan);
+/**
+ * Kecamatan list store.
+ * Hydrated from +page.server.js data or static JSON fallback.
+ * @type {import('svelte/store').Writable<Array>}
+ */
+export const kecamatanList = writable([]);
 
 /** @type {import('svelte/store').Writable<string|null>} */
 export const selectedKecamatanId = writable(null);
@@ -19,7 +22,17 @@ export const selectedKecamatan = derived(
 
 /** Derived: aggregate summary stats across all kecamatan */
 export const summaryStats = derived(kecamatanList, ($list) => {
-  const totalPenduduk = $list.reduce((s, k) => s + k.penduduk.jumlahTotal, 0);
+  if (!$list.length) {
+    return {
+      totalKecamatan: 0,
+      totalPenduduk: 0,
+      totalProduksiPertanian: 0,
+      totalLuasPerkebunan: 0,
+      totalPopulasiTernak: 0,
+    };
+  }
+
+  const totalPenduduk = $list.reduce((s, k) => s + (k.penduduk?.jumlahTotal || 0), 0);
 
   const totalProduksiPertanian = $list.reduce(
     (s, k) => s + calculateTotal(k.pertanian, 'produksi'),

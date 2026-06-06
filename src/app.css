@@ -1,30 +1,30 @@
-/* ===== DESIGN SYSTEM: RIO Corporate Statistics Portal ===== */
+/* ===== DESIGN SYSTEM: RIO Kemendagri Data Portal ===== */
 
 :root {
   /* Color Palette - Corporate Light Theme */
-  --bg-primary: hsl(210, 33%, 98%);
+  --bg-primary: hsl(45, 60%, 97%);
   --bg-secondary: hsl(0, 0%, 100%);
-  --bg-tertiary: hsl(210, 31%, 94%);
+  --bg-tertiary: hsl(48, 55%, 93%);
   --bg-glass: hsl(0, 0%, 100%);
   --bg-glass-hover: hsl(210, 40%, 99%);
   --border-glass: hsl(214, 24%, 88%);
-  --border-glass-hover: hsl(204, 38%, 72%);
+  --border-glass-hover: hsl(151, 44%, 62%);
 
   /* Accent Colors */
-  --accent-green: hsl(156, 71%, 31%);
-  --accent-green-soft: hsla(156, 71%, 31%, 0.1);
-  --accent-orange: hsl(35, 92%, 46%);
-  --accent-orange-soft: hsla(35, 92%, 46%, 0.12);
-  --accent-blue: hsl(210, 78%, 36%);
-  --accent-blue-soft: hsla(210, 78%, 36%, 0.1);
+  --accent-green: hsl(151, 72%, 27%);
+  --accent-green-soft: hsla(151, 72%, 27%, 0.11);
+  --accent-orange: hsl(44, 96%, 45%);
+  --accent-orange-soft: hsla(44, 96%, 45%, 0.14);
+  --accent-blue: hsl(212, 67%, 28%);
+  --accent-blue-soft: hsla(212, 67%, 28%, 0.1);
   --accent-purple: hsl(252, 44%, 46%);
   --accent-purple-soft: hsla(252, 44%, 46%, 0.1);
-  --accent-rose: hsl(344, 65%, 43%);
-  --accent-rose-soft: hsla(344, 65%, 43%, 0.1);
-  --accent-cyan: hsl(188, 84%, 32%);
-  --accent-cyan-soft: hsla(188, 84%, 32%, 0.1);
-  --accent-navy: hsl(213, 55%, 18%);
-  --accent-navy-soft: hsla(213, 55%, 18%, 0.08);
+  --accent-rose: hsl(356, 68%, 45%);
+  --accent-rose-soft: hsla(356, 68%, 45%, 0.1);
+  --accent-cyan: hsl(182, 67%, 33%);
+  --accent-cyan-soft: hsla(182, 67%, 33%, 0.1);
+  --accent-navy: hsl(214, 67%, 16%);
+  --accent-navy-soft: hsla(214, 67%, 16%, 0.08);
 
   /* Text Colors */
   --text-primary: hsl(214, 42%, 15%);
@@ -82,7 +82,8 @@ html {
 
 body {
   font-family: var(--font-family);
-  background: var(--bg-primary);
+  background:
+    linear-gradient(180deg, hsl(47, 70%, 97%) 0%, hsl(210, 40%, 98%) 42%, hsl(45, 60%, 97%) 100%);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;

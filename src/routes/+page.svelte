@@ -14,6 +14,16 @@
   } from '$lib/data/indonesiaAreas.js';
   import { MapPin, Users, Wheat, Database, Building2, Landmark, Layers3 } from '@lucide/svelte';
 
+  /** @type {{ data: { kecamatanList: Array } }} */
+  let { data } = $props();
+
+  // Hydrate the store from server-loaded data (Supabase or static fallback)
+  $effect(() => {
+    if (data?.kecamatanList) {
+      kecamatanList.set(data.kecamatanList);
+    }
+  });
+
   // Chart Data: Perbandingan Produksi Pertanian Antar Kecamatan
   const pertanianChartData = $derived({
     labels: $kecamatanList.map((k) => k.nama),
@@ -74,11 +84,20 @@
 <div class="dashboard">
   <header class="dashboard__header animate-fade-in-up">
     <div class="dashboard__header-main">
-      <h1 class="dashboard__title">Potensi Perbatasan Darat</h1>
-      <p class="dashboard__desc">
-        Dashboard ringkas potensi wilayah Indonesia dengan data kecamatan nasional
-        dan dummy indikator potensi yang mengikuti struktur publikasi BPS.
-      </p>
+      <div class="dashboard__ministry">
+        <img src="/logo.svg" alt="Logo Kementerian" />
+        <div>
+          <span>Kementerian Dalam Negeri</span>
+          <strong>Republik Indonesia</strong>
+        </div>
+      </div>
+      <div>
+        <h1 class="dashboard__title">Dashboard Wilayah Nasional</h1>
+        <p class="dashboard__desc">
+          Pemantauan potensi wilayah Indonesia dengan data kecamatan nasional
+          dan dummy indikator potensi yang mengikuti struktur publikasi BPS.
+        </p>
+      </div>
     </div>
     <div class="dashboard__source-card">
       <Database size={18} />
@@ -91,7 +110,7 @@
 
   <section class="dashboard__overview" aria-label="Ikhtisar data">
     <div class="dashboard__overview-main">
-      <span class="dashboard__label">RIO Data Portal</span>
+      <span class="dashboard__label">RIO Kemendagri Data Portal</span>
       <h2>Monitoring cepat data kecamatan seluruh Indonesia.</h2>
       <p>
         Data wilayah nasional diambil dari paket statis `idn-area-data`. Angka
@@ -287,12 +306,54 @@
   .dashboard__header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
     gap: var(--space-lg);
+    padding: var(--space-lg);
+    border: 1px solid hsla(151, 72%, 27%, 0.16);
+    border-radius: var(--radius-xl);
+    background:
+      linear-gradient(135deg, hsla(151, 72%, 27%, 0.12), hsla(44, 96%, 55%, 0.16)),
+      white;
+    box-shadow: var(--shadow-sm);
   }
 
   .dashboard__header-main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
     max-width: 720px;
+  }
+
+  .dashboard__ministry {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .dashboard__ministry img {
+    width: 54px;
+    height: 70px;
+    object-fit: contain;
+  }
+
+  .dashboard__ministry div {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+  }
+
+  .dashboard__ministry span {
+    color: var(--accent-green);
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dashboard__ministry strong {
+    color: var(--accent-navy);
+    font-size: 0.88rem;
   }
 
   .dashboard__title {
@@ -317,7 +378,7 @@
     padding: 0.85rem 1rem;
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-lg);
-    background: var(--bg-secondary);
+    background: white;
     color: var(--accent-blue);
     box-shadow: var(--shadow-sm);
   }
@@ -346,9 +407,11 @@
     grid-template-columns: 1fr 320px;
     gap: var(--space-md);
     padding: 1.25rem;
-    border: 1px solid var(--border-glass);
+    border: 1px solid hsla(151, 72%, 27%, 0.18);
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, white 0%, hsl(210, 50%, 97%) 100%);
+    background:
+      linear-gradient(135deg, hsla(214, 67%, 16%, 0.96), hsla(151, 72%, 27%, 0.9)),
+      linear-gradient(135deg, hsla(44, 96%, 55%, 0.28), transparent 50%);
     box-shadow: var(--shadow-sm);
   }
 
@@ -360,7 +423,7 @@
 
   .dashboard__label {
     width: fit-content;
-    color: var(--accent-blue);
+    color: hsl(44, 96%, 72%);
     font-size: 0.72rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -368,12 +431,12 @@
   }
 
   .dashboard__overview h2 {
-    color: var(--accent-navy);
+    color: white;
     font-size: 1.35rem;
   }
 
   .dashboard__overview p {
-    color: var(--text-secondary);
+    color: hsla(0, 0%, 100%, 0.78);
     font-size: 0.9rem;
     max-width: 760px;
   }
@@ -384,12 +447,12 @@
     justify-content: center;
     gap: 0.35rem;
     padding: var(--space-md);
-    border-left: 1px solid var(--border-glass);
-    color: var(--accent-green);
+    border-left: 1px solid hsla(0, 0%, 100%, 0.18);
+    color: hsl(44, 96%, 72%);
   }
 
   .dashboard__overview-side span {
-    color: var(--text-muted);
+    color: hsla(0, 0%, 100%, 0.66);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -397,7 +460,7 @@
   }
 
   .dashboard__overview-side strong {
-    color: var(--text-primary);
+    color: white;
     font-size: 0.95rem;
   }
 
@@ -624,6 +687,11 @@
     }
 
     .dashboard__header {
+      flex-direction: column;
+    }
+
+    .dashboard__header-main {
+      align-items: flex-start;
       flex-direction: column;
     }
 

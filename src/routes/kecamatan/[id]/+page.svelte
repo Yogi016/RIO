@@ -1,6 +1,4 @@
 <script>
-  import { page } from '$app/state';
-  import { kecamatanList } from '$lib/stores/kecamatan.js';
   import { calculateTotal, formatNumber, formatHa, formatTon } from '$lib/utils/formatters.js';
   import StatCard from '$lib/components/StatCard.svelte';
   import CommodityTable from '$lib/components/CommodityTable.svelte';
@@ -10,8 +8,11 @@
   import AdminInfo from '$lib/components/AdminInfo.svelte';
   import { Wheat, TreePine, Beef, Users, MapPin, ArrowLeft, Sprout, MilkOff } from '@lucide/svelte';
 
-  const kecId = $derived(page.params.id);
-  const kec = $derived($kecamatanList.find((k) => k.id === kecId));
+  /** @type {{ data: { kec: Object } }} */
+  let { data } = $props();
+
+  // Kecamatan data from server (Supabase or static fallback)
+  const kec = $derived(data.kec);
 
   let activeTab = $state('pertanian');
 
@@ -104,11 +105,10 @@
 </script>
 
 <svelte:head>
-  <title>{kec ? `${kec.nama} — RIO Potensi Perbatasan` : 'Kecamatan — RIO'}</title>
+  <title>{kec.nama} — RIO Potensi Perbatasan</title>
 </svelte:head>
 
-{#if kec}
-  <div class="detail">
+<div class="detail">
     <!-- Back Button + Hero -->
     <header class="detail__header animate-fade-in-up">
       <a href="/" class="detail__back">
@@ -298,13 +298,7 @@
       {/key}
     </div>
   </div>
-{:else}
-  <div class="detail__not-found">
-    <h2>Kecamatan tidak ditemukan</h2>
-    <p>ID kecamatan "{kecId}" tidak tersedia dalam database.</p>
-    <a href="/" class="detail__back-link">← Kembali ke Dashboard</a>
-  </div>
-{/if}
+
 
 <style>
   .detail {

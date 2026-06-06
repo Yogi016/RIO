@@ -22,6 +22,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^1.17.0",
+		"@supabase/supabase-js": "^2.107.0",
 		"chart.js": "^4.5.1",
 		"idn-area-data": "^4.0.1",
 		"leaflet": "^1.9.4",
