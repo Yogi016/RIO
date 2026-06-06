@@ -5,7 +5,14 @@
   import KecamatanCard from '$lib/components/KecamatanCard.svelte';
   import BarChart from '$lib/components/BarChart.svelte';
   import DoughnutChart from '$lib/components/DoughnutChart.svelte';
-  import { MapPin, Users, Wheat, TreePine, Database, Building2 } from '@lucide/svelte';
+  import IndonesiaMap from '$lib/components/IndonesiaMap.svelte';
+  import {
+    indonesiaDistricts,
+    nationalAreaSummary,
+    provinceSummaries,
+    topProvinceSummaries,
+  } from '$lib/data/indonesiaAreas.js';
+  import { MapPin, Users, Wheat, Database, Building2, Landmark, Layers3 } from '@lucide/svelte';
 
   // Chart Data: Perbandingan Produksi Pertanian Antar Kecamatan
   const pertanianChartData = $derived({
@@ -56,6 +63,8 @@
       totalTernak: calculateTotal(k.peternakan, 'populasi'),
     }))
   );
+
+  const districtExamples = indonesiaDistricts.slice(0, 10);
 </script>
 
 <svelte:head>
@@ -67,15 +76,15 @@
     <div class="dashboard__header-main">
       <h1 class="dashboard__title">Potensi Perbatasan Darat</h1>
       <p class="dashboard__desc">
-        Dashboard ringkas potensi wilayah perbatasan Indonesia dengan dummy data
-        yang mengikuti struktur indikator publikasi BPS.
+        Dashboard ringkas potensi wilayah Indonesia dengan data kecamatan nasional
+        dan dummy indikator potensi yang mengikuti struktur publikasi BPS.
       </p>
     </div>
     <div class="dashboard__source-card">
       <Database size={18} />
       <div>
         <span>Sumber Data</span>
-        <strong>BPS Dalam Angka 2024</strong>
+        <strong>idn-area-data + BPS-like dummy</strong>
       </div>
     </div>
   </header>
@@ -83,53 +92,109 @@
   <section class="dashboard__overview" aria-label="Ikhtisar data">
     <div class="dashboard__overview-main">
       <span class="dashboard__label">RIO Data Portal</span>
-      <h2>Monitoring cepat indikator kecamatan perbatasan.</h2>
+      <h2>Monitoring cepat data kecamatan seluruh Indonesia.</h2>
       <p>
-        Angka pada prototipe ini adalah dummy untuk kebutuhan tampilan. Struktur
-        indikator mengikuti pola data BPS: administrasi wilayah, kependudukan,
-        pertanian, perkebunan, dan peternakan.
+        Data wilayah nasional diambil dari paket statis `idn-area-data`. Angka
+        potensi ekonomi tetap dummy untuk kebutuhan tampilan dan mengikuti pola
+        indikator BPS: administrasi wilayah, kependudukan, pertanian,
+        perkebunan, dan peternakan.
       </p>
     </div>
     <div class="dashboard__overview-side">
       <Building2 size={22} />
-      <span>Cakupan Contoh</span>
-      <strong>Kalimantan Barat dan Kalimantan Utara</strong>
+      <span>Cakupan Nasional</span>
+      <strong>{nationalAreaSummary.provinceCount} provinsi, {nationalAreaSummary.districtCount.toLocaleString('id-ID')} kecamatan</strong>
     </div>
   </section>
 
   <section class="dashboard__stats" aria-label="Ringkasan statistik">
     <StatCard
       icon={MapPin}
-      label="Total Kecamatan"
-      value={$summaryStats.totalKecamatan}
-      unit="kecamatan"
+      label="Provinsi"
+      value={nationalAreaSummary.provinceCount}
+      unit="provinsi"
       color="var(--accent-cyan)"
       delay={0}
     />
     <StatCard
-      icon={Users}
-      label="Total Penduduk"
-      value={$summaryStats.totalPenduduk}
-      unit="jiwa"
+      icon={Landmark}
+      label="Kab/Kota"
+      value={nationalAreaSummary.regencyCount}
+      unit="wilayah"
       color="var(--accent-blue)"
       delay={80}
     />
     <StatCard
-      icon={Wheat}
-      label="Produksi Pertanian"
-      value={$summaryStats.totalProduksiPertanian}
-      unit="ton"
+      icon={Layers3}
+      label="Kecamatan Nasional"
+      value={nationalAreaSummary.districtCount}
+      unit="kecamatan"
       color="var(--accent-green)"
       delay={160}
     />
     <StatCard
-      icon={TreePine}
-      label="Luas Perkebunan"
-      value={$summaryStats.totalLuasPerkebunan}
-      unit="ha"
+      icon={Users}
+      label="Penduduk Contoh"
+      value={$summaryStats.totalPenduduk}
+      unit="jiwa"
       color="var(--accent-orange)"
       delay={240}
     />
+  </section>
+
+  <section class="dashboard__map-grid" aria-label="Peta dan agregasi kecamatan Indonesia">
+    <IndonesiaMap provinces={provinceSummaries} />
+
+    <div class="dashboard__province-panel glass-card">
+      <div class="dashboard__province-head">
+        <h3>Provinsi dengan Kecamatan Terbanyak</h3>
+        <span>Top 8</span>
+      </div>
+      <div class="dashboard__province-list">
+        {#each topProvinceSummaries as province, i}
+          <div class="dashboard__province-row">
+            <span>{i + 1}</span>
+            <div>
+              <strong>{province.name}</strong>
+              <small>{province.regencyCount} kab/kota</small>
+            </div>
+            <b>{province.districtCount.toLocaleString('id-ID')}</b>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard__section" aria-label="Contoh data kecamatan nasional">
+    <div class="dashboard__section-head">
+      <div>
+        <h2 class="dashboard__section-title">Contoh Data Kecamatan Nasional</h2>
+        <p class="dashboard__section-desc">
+          Dataset lengkap memuat {nationalAreaSummary.districtCount.toLocaleString('id-ID')} kecamatan; tabel ini menampilkan contoh awal dari data statis.
+        </p>
+      </div>
+    </div>
+
+    <div class="dashboard__table glass-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Kode Kecamatan</th>
+            <th>Nama Kecamatan</th>
+            <th>Kode Kab/Kota</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each districtExamples as district}
+            <tr>
+              <td><strong>{district.code}</strong></td>
+              <td>{district.name}</td>
+              <td>{district.regency_code}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section class="dashboard__charts" aria-label="Grafik ringkasan">
@@ -159,7 +224,7 @@
       <div>
         <h2 class="dashboard__section-title">Perbandingan Indikator Wilayah</h2>
         <p class="dashboard__section-desc">
-          Format tabel dibuat untuk pembacaan cepat seperti portal statistik.
+          Data contoh potensi perbatasan untuk pembacaan cepat seperti portal statistik.
         </p>
       </div>
     </div>
@@ -199,7 +264,7 @@
     <div>
       <h2 class="dashboard__section-title">Kecamatan Perbatasan</h2>
       <p class="dashboard__section-desc">
-        Pilih kecamatan untuk melihat detail potensi komoditas dan data kependudukan.
+        Kecamatan contoh untuk detail dummy potensi komoditas dan data kependudukan.
       </p>
     </div>
 
@@ -352,6 +417,91 @@
     grid-template-columns: 1fr;
   }
 
+  .dashboard__map-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: var(--space-md);
+  }
+
+  .dashboard__province-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .dashboard__province-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--border-glass);
+    background: hsl(210, 40%, 99%);
+  }
+
+  .dashboard__province-head h3 {
+    color: var(--accent-navy);
+    font-size: 1rem;
+  }
+
+  .dashboard__province-head span {
+    color: var(--accent-blue);
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .dashboard__province-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dashboard__province-row {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.78rem var(--space-lg);
+    border-bottom: 1px solid hsl(214, 24%, 91%);
+  }
+
+  .dashboard__province-row > span {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-navy-soft);
+    color: var(--accent-navy);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .dashboard__province-row div {
+    min-width: 0;
+  }
+
+  .dashboard__province-row strong,
+  .dashboard__province-row small {
+    display: block;
+  }
+
+  .dashboard__province-row strong {
+    color: var(--text-primary);
+    font-size: 0.86rem;
+  }
+
+  .dashboard__province-row small {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  .dashboard__province-row b {
+    color: var(--accent-green);
+    font-size: 0.9rem;
+  }
+
   .dashboard__section {
     display: flex;
     flex-direction: column;
@@ -438,6 +588,10 @@
     }
 
     .dashboard__charts {
+      grid-template-columns: 1fr;
+    }
+
+    .dashboard__map-grid {
       grid-template-columns: 1fr;
     }
 

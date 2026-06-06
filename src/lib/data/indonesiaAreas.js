@@ -1,3 +1,4 @@
+// @ts-nocheck
 import provincesCsv from 'idn-area-data/data/provinces.csv?raw';
 import regenciesCsv from 'idn-area-data/data/regencies.csv?raw';
 import districtsCsv from 'idn-area-data/data/districts.csv?raw';
