@@ -1,0 +1,276 @@
+{
+  "metadata": {
+    "label": "Dummy data indikator wilayah",
+    "basis": "Struktur publikasi BPS Kecamatan Dalam Angka 2024",
+    "catatan": "Angka digunakan untuk prototipe UI dan perlu diganti dengan tabel resmi BPS sebelum produksi."
+  },
+  "kecamatan": [
+    {
+      "id": "entikong",
+      "nama": "Entikong",
+      "kabupaten": "Sanggau",
+      "provinsi": "Kalimantan Barat",
+      "negaraTetangga": "Malaysia (Sarawak)",
+      "plbn": "PLBN Entikong",
+      "administrasi": {
+        "luasWilayah": 506.89,
+        "jumlahDesa": 5,
+        "jumlahDusun": 22,
+        "jumlahRT": 85,
+        "jumlahRW": 30,
+        "camat": "Drs. Antonius Naing, M.Si"
+      },
+      "penduduk": {
+        "jumlahTotal": 18500,
+        "lakilaki": 9400,
+        "perempuan": 9100,
+        "kepadatan": 36.5,
+        "jumlahKK": 4200,
+        "pertumbuhanPersen": 1.2
+      },
+      "pertanian": [
+        { "komoditas": "Padi Sawah", "luasTanam": 1200, "luasPanen": 1150, "produksi": 4600, "produktivitas": 4.0 },
+        { "komoditas": "Padi Ladang", "luasTanam": 680, "luasPanen": 650, "produksi": 1625, "produktivitas": 2.5 },
+        { "komoditas": "Jagung", "luasTanam": 350, "luasPanen": 320, "produksi": 1280, "produktivitas": 4.0 },
+        { "komoditas": "Ubi Kayu", "luasTanam": 200, "luasPanen": 190, "produksi": 3800, "produktivitas": 20.0 },
+        { "komoditas": "Ubi Jalar", "luasTanam": 120, "luasPanen": 110, "produksi": 1540, "produktivitas": 14.0 },
+        { "komoditas": "Kacang Tanah", "luasTanam": 80, "luasPanen": 75, "produksi": 112, "produktivitas": 1.5 }
+      ],
+      "perkebunan": [
+        { "komoditas": "Kelapa Sawit", "luasAreal": 5200, "produksi": 15600, "jumlahPetani": 2300 },
+        { "komoditas": "Karet", "luasAreal": 3100, "produksi": 2480, "jumlahPetani": 1800 },
+        { "komoditas": "Lada", "luasAreal": 450, "produksi": 270, "jumlahPetani": 600 },
+        { "komoditas": "Kakao", "luasAreal": 320, "produksi": 192, "jumlahPetani": 420 },
+        { "komoditas": "Kelapa", "luasAreal": 280, "produksi": 336, "jumlahPetani": 350 }
+      ],
+      "peternakan": [
+        { "jenis": "Sapi", "populasi": 1200, "produksiDaging": 85, "produksiTelur": 0 },
+        { "jenis": "Babi", "populasi": 3500, "produksiDaging": 210, "produksiTelur": 0 },
+        { "jenis": "Kambing", "populasi": 450, "produksiDaging": 18, "produksiTelur": 0 },
+        { "jenis": "Ayam Kampung", "populasi": 15000, "produksiDaging": 45, "produksiTelur": 180000 },
+        { "jenis": "Ayam Ras", "populasi": 8000, "produksiDaging": 32, "produksiTelur": 420000 },
+        { "jenis": "Itik", "populasi": 2200, "produksiDaging": 8, "produksiTelur": 95000 }
+      ]
+    },
+    {
+      "id": "badau",
+      "nama": "Badau",
+      "kabupaten": "Kapuas Hulu",
+      "provinsi": "Kalimantan Barat",
+      "negaraTetangga": "Malaysia (Sarawak)",
+      "plbn": "PLBN Badau",
+      "administrasi": {
+        "luasWilayah": 700.2,
+        "jumlahDesa": 8,
+        "jumlahDusun": 34,
+        "jumlahRT": 110,
+        "jumlahRW": 42,
+        "camat": "Yohanes Edy, S.STP, M.Si"
+      },
+      "penduduk": {
+        "jumlahTotal": 12800,
+        "lakilaki": 6500,
+        "perempuan": 6300,
+        "kepadatan": 18.3,
+        "jumlahKK": 3100,
+        "pertumbuhanPersen": 0.9
+      },
+      "pertanian": [
+        { "komoditas": "Padi Sawah", "luasTanam": 850, "luasPanen": 800, "produksi": 3200, "produktivitas": 4.0 },
+        { "komoditas": "Padi Ladang", "luasTanam": 920, "luasPanen": 880, "produksi": 2200, "produktivitas": 2.5 },
+        { "komoditas": "Jagung", "luasTanam": 180, "luasPanen": 165, "produksi": 660, "produktivitas": 4.0 },
+        { "komoditas": "Ubi Kayu", "luasTanam": 310, "luasPanen": 295, "produksi": 5900, "produktivitas": 20.0 },
+        { "komoditas": "Kacang Tanah", "luasTanam": 55, "luasPanen": 50, "produksi": 75, "produktivitas": 1.5 }
+      ],
+      "perkebunan": [
+        { "komoditas": "Kelapa Sawit", "luasAreal": 3800, "produksi": 11400, "jumlahPetani": 1700 },
+        { "komoditas": "Karet", "luasAreal": 4200, "produksi": 3360, "jumlahPetani": 2100 },
+        { "komoditas": "Lada", "luasAreal": 180, "produksi": 108, "jumlahPetani": 280 },
+        { "komoditas": "Kakao", "luasAreal": 150, "produksi": 90, "jumlahPetani": 200 }
+      ],
+      "peternakan": [
+        { "jenis": "Sapi", "populasi": 850, "produksiDaging": 60, "produksiTelur": 0 },
+        { "jenis": "Babi", "populasi": 4200, "produksiDaging": 252, "produksiTelur": 0 },
+        { "jenis": "Kambing", "populasi": 280, "produksiDaging": 11, "produksiTelur": 0 },
+        { "jenis": "Ayam Kampung", "populasi": 12000, "produksiDaging": 36, "produksiTelur": 144000 },
+        { "jenis": "Itik", "populasi": 1800, "produksiDaging": 6, "produksiTelur": 78000 }
+      ]
+    },
+    {
+      "id": "jagoi-babang",
+      "nama": "Jagoi Babang",
+      "kabupaten": "Bengkayang",
+      "provinsi": "Kalimantan Barat",
+      "negaraTetangga": "Malaysia (Sarawak)",
+      "plbn": "PLBN Aruk",
+      "administrasi": {
+        "luasWilayah": 655.0,
+        "jumlahDesa": 6,
+        "jumlahDusun": 28,
+        "jumlahRT": 96,
+        "jumlahRW": 36,
+        "camat": "Herkulanus, S.STP"
+      },
+      "penduduk": {
+        "jumlahTotal": 10200,
+        "lakilaki": 5300,
+        "perempuan": 4900,
+        "kepadatan": 15.6,
+        "jumlahKK": 2450,
+        "pertumbuhanPersen": 1.0
+      },
+      "pertanian": [
+        { "komoditas": "Padi Sawah", "luasTanam": 620, "luasPanen": 590, "produksi": 2360, "produktivitas": 4.0 },
+        { "komoditas": "Padi Ladang", "luasTanam": 750, "luasPanen": 720, "produksi": 1800, "produktivitas": 2.5 },
+        { "komoditas": "Jagung", "luasTanam": 220, "luasPanen": 200, "produksi": 800, "produktivitas": 4.0 },
+        { "komoditas": "Ubi Kayu", "luasTanam": 180, "luasPanen": 170, "produksi": 3400, "produktivitas": 20.0 },
+        { "komoditas": "Sayuran", "luasTanam": 95, "luasPanen": 90, "produksi": 540, "produktivitas": 6.0 }
+      ],
+      "perkebunan": [
+        { "komoditas": "Kelapa Sawit", "luasAreal": 4100, "produksi": 12300, "jumlahPetani": 1900 },
+        { "komoditas": "Karet", "luasAreal": 2800, "produksi": 2240, "jumlahPetani": 1500 },
+        { "komoditas": "Lada", "luasAreal": 620, "produksi": 372, "jumlahPetani": 750 },
+        { "komoditas": "Kakao", "luasAreal": 250, "produksi": 150, "jumlahPetani": 310 },
+        { "komoditas": "Kopi", "luasAreal": 180, "produksi": 90, "jumlahPetani": 240 }
+      ],
+      "peternakan": [
+        { "jenis": "Sapi", "populasi": 680, "produksiDaging": 48, "produksiTelur": 0 },
+        { "jenis": "Babi", "populasi": 2800, "produksiDaging": 168, "produksiTelur": 0 },
+        { "jenis": "Kambing", "populasi": 350, "produksiDaging": 14, "produksiTelur": 0 },
+        { "jenis": "Ayam Kampung", "populasi": 11000, "produksiDaging": 33, "produksiTelur": 132000 },
+        { "jenis": "Ayam Ras", "populasi": 5000, "produksiDaging": 20, "produksiTelur": 260000 },
+        { "jenis": "Itik", "populasi": 1500, "produksiDaging": 5, "produksiTelur": 65000 }
+      ]
+    },
+    {
+      "id": "paloh",
+      "nama": "Paloh",
+      "kabupaten": "Sambas",
+      "provinsi": "Kalimantan Barat",
+      "negaraTetangga": "Malaysia (Sarawak)",
+      "plbn": "Pos Temajuk",
+      "administrasi": {
+        "luasWilayah": 1148.7,
+        "jumlahDesa": 7,
+        "jumlahDusun": 30,
+        "jumlahRT": 105,
+        "jumlahRW": 40,
+        "camat": "Rahmad Hidayat, S.STP"
+      },
+      "penduduk": {
+        "jumlahTotal": 14200,
+        "lakilaki": 7300,
+        "perempuan": 6900,
+        "kepadatan": 12.4,
+        "jumlahKK": 3500,
+        "pertumbuhanPersen": 0.8
+      },
+      "pertanian": [
+        { "komoditas": "Padi Sawah", "luasTanam": 1500, "luasPanen": 1420, "produksi": 5680, "produktivitas": 4.0 },
+        { "komoditas": "Jagung", "luasTanam": 280, "luasPanen": 260, "produksi": 1040, "produktivitas": 4.0 },
+        { "komoditas": "Ubi Kayu", "luasTanam": 150, "luasPanen": 140, "produksi": 2800, "produktivitas": 20.0 },
+        { "komoditas": "Kacang Tanah", "luasTanam": 70, "luasPanen": 65, "produksi": 97, "produktivitas": 1.5 },
+        { "komoditas": "Sayuran", "luasTanam": 110, "luasPanen": 105, "produksi": 630, "produktivitas": 6.0 }
+      ],
+      "perkebunan": [
+        { "komoditas": "Kelapa Sawit", "luasAreal": 6200, "produksi": 18600, "jumlahPetani": 2800 },
+        { "komoditas": "Karet", "luasAreal": 2500, "produksi": 2000, "jumlahPetani": 1400 },
+        { "komoditas": "Kelapa", "luasAreal": 1800, "produksi": 2160, "jumlahPetani": 1100 },
+        { "komoditas": "Lada", "luasAreal": 350, "produksi": 210, "jumlahPetani": 450 }
+      ],
+      "peternakan": [
+        { "jenis": "Sapi", "populasi": 1500, "produksiDaging": 105, "produksiTelur": 0 },
+        { "jenis": "Kambing", "populasi": 620, "produksiDaging": 25, "produksiTelur": 0 },
+        { "jenis": "Ayam Kampung", "populasi": 18000, "produksiDaging": 54, "produksiTelur": 216000 },
+        { "jenis": "Ayam Ras", "populasi": 10000, "produksiDaging": 40, "produksiTelur": 520000 },
+        { "jenis": "Itik", "populasi": 3000, "produksiDaging": 10, "produksiTelur": 130000 }
+      ]
+    },
+    {
+      "id": "sajingan-besar",
+      "nama": "Sajingan Besar",
+      "kabupaten": "Sambas",
+      "provinsi": "Kalimantan Barat",
+      "negaraTetangga": "Malaysia (Sarawak)",
+      "plbn": "Pos Sajingan",
+      "administrasi": {
+        "luasWilayah": 1391.2,
+        "jumlahDesa": 5,
+        "jumlahDusun": 20,
+        "jumlahRT": 72,
+        "jumlahRW": 28,
+        "camat": "Muhammad Arif, S.IP"
+      },
+      "penduduk": {
+        "jumlahTotal": 8500,
+        "lakilaki": 4400,
+        "perempuan": 4100,
+        "kepadatan": 6.1,
+        "jumlahKK": 2050,
+        "pertumbuhanPersen": 0.7
+      },
+      "pertanian": [
+        { "komoditas": "Padi Ladang", "luasTanam": 950, "luasPanen": 900, "produksi": 2250, "produktivitas": 2.5 },
+        { "komoditas": "Padi Sawah", "luasTanam": 420, "luasPanen": 400, "produksi": 1600, "produktivitas": 4.0 },
+        { "komoditas": "Jagung", "luasTanam": 150, "luasPanen": 140, "produksi": 560, "produktivitas": 4.0 },
+        { "komoditas": "Ubi Kayu", "luasTanam": 250, "luasPanen": 240, "produksi": 4800, "produktivitas": 20.0 }
+      ],
+      "perkebunan": [
+        { "komoditas": "Kelapa Sawit", "luasAreal": 3500, "produksi": 10500, "jumlahPetani": 1600 },
+        { "komoditas": "Karet", "luasAreal": 3800, "produksi": 3040, "jumlahPetani": 1900 },
+        { "komoditas": "Lada", "luasAreal": 280, "produksi": 168, "jumlahPetani": 380 }
+      ],
+      "peternakan": [
+        { "jenis": "Sapi", "populasi": 550, "produksiDaging": 38, "produksiTelur": 0 },
+        { "jenis": "Babi", "populasi": 2100, "produksiDaging": 126, "produksiTelur": 0 },
+        { "jenis": "Kambing", "populasi": 200, "produksiDaging": 8, "produksiTelur": 0 },
+        { "jenis": "Ayam Kampung", "populasi": 9000, "produksiDaging": 27, "produksiTelur": 108000 },
+        { "jenis": "Itik", "populasi": 1200, "produksiDaging": 4, "produksiTelur": 52000 }
+      ]
+    },
+    {
+      "id": "sebatik",
+      "nama": "Sebatik",
+      "kabupaten": "Nunukan",
+      "provinsi": "Kalimantan Utara",
+      "negaraTetangga": "Malaysia (Sabah)",
+      "plbn": "PLBN Sei Pancang",
+      "administrasi": {
+        "luasWilayah": 246.6,
+        "jumlahDesa": 6,
+        "jumlahDusun": 18,
+        "jumlahRT": 68,
+        "jumlahRW": 24,
+        "camat": "Ir. Ahmad Fauzi"
+      },
+      "penduduk": {
+        "jumlahTotal": 22500,
+        "lakilaki": 11800,
+        "perempuan": 10700,
+        "kepadatan": 91.2,
+        "jumlahKK": 5400,
+        "pertumbuhanPersen": 2.1
+      },
+      "pertanian": [
+        { "komoditas": "Padi Sawah", "luasTanam": 580, "luasPanen": 550, "produksi": 2200, "produktivitas": 4.0 },
+        { "komoditas": "Jagung", "luasTanam": 420, "luasPanen": 400, "produksi": 1600, "produktivitas": 4.0 },
+        { "komoditas": "Ubi Kayu", "luasTanam": 180, "luasPanen": 170, "produksi": 3400, "produktivitas": 20.0 },
+        { "komoditas": "Sayuran", "luasTanam": 250, "luasPanen": 240, "produksi": 1440, "produktivitas": 6.0 },
+        { "komoditas": "Pisang", "luasTanam": 320, "luasPanen": 310, "produksi": 4650, "produktivitas": 15.0 }
+      ],
+      "perkebunan": [
+        { "komoditas": "Kelapa Sawit", "luasAreal": 7500, "produksi": 22500, "jumlahPetani": 3200 },
+        { "komoditas": "Kelapa", "luasAreal": 1200, "produksi": 1440, "jumlahPetani": 800 },
+        { "komoditas": "Kakao", "luasAreal": 850, "produksi": 510, "jumlahPetani": 650 },
+        { "komoditas": "Kopi", "luasAreal": 200, "produksi": 100, "jumlahPetani": 180 }
+      ],
+      "peternakan": [
+        { "jenis": "Sapi", "populasi": 2200, "produksiDaging": 154, "produksiTelur": 0 },
+        { "jenis": "Kambing", "populasi": 800, "produksiDaging": 32, "produksiTelur": 0 },
+        { "jenis": "Ayam Kampung", "populasi": 20000, "produksiDaging": 60, "produksiTelur": 240000 },
+        { "jenis": "Ayam Ras", "populasi": 15000, "produksiDaging": 60, "produksiTelur": 780000 },
+        { "jenis": "Itik", "populasi": 3500, "produksiDaging": 12, "produksiTelur": 152000 }
+      ]
+    }
+  ]
+}
