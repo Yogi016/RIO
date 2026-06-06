@@ -6,7 +6,8 @@
   import DoughnutChart from '$lib/components/DoughnutChart.svelte';
   import PopulationInfo from '$lib/components/PopulationInfo.svelte';
   import AdminInfo from '$lib/components/AdminInfo.svelte';
-  import { Wheat, TreePine, Beef, Users, MapPin, ArrowLeft, Sprout, MilkOff } from '@lucide/svelte';
+  import { Wheat, TreePine, Beef, Users, MapPin, ArrowLeft, Sprout, MilkOff, Pencil } from '@lucide/svelte';
+  import { authSession } from '$lib/stores/auth.js';
 
   /** @type {{ data: { kec: Object } }} */
   let { data } = $props();
@@ -124,9 +125,15 @@
             {kec.kabupaten}, {kec.provinsi}
           </p>
         </div>
-        <div class="detail__hero-badges">
+        <div class="detail__hero-badges" style="display: flex; align-items: center; gap: var(--space-xs); flex-wrap: wrap;">
           <span class="badge badge--blue">{kec.negaraTetangga}</span>
           <span class="badge badge--green">{kec.plbn}</span>
+          {#if $authSession && ($authSession.role === 'admin' || $authSession.role === 'super_admin')}
+            <a href="/admin/input?edit={kec.id}" class="btn-edit-kec">
+              <Pencil size={12} />
+              <span>Edit Data</span>
+            </a>
+          {/if}
         </div>
       </div>
     </header>
@@ -361,6 +368,26 @@
     display: flex;
     gap: var(--space-sm);
     flex-wrap: wrap;
+  }
+
+  .btn-edit-kec {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: var(--accent-green);
+    color: white;
+    font-size: 0.74rem;
+    font-weight: 800;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 10px hsla(152, 72%, 27%, 0.14);
+    transition: all var(--transition-fast);
+  }
+
+  .btn-edit-kec:hover {
+    background: hsl(152, 72%, 23%);
+    box-shadow: 0 6px 14px hsla(152, 72%, 27%, 0.22);
+    transform: translateY(-1px);
   }
 
   /* Tabs */

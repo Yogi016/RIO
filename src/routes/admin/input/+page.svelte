@@ -1,6 +1,7 @@
 <script>
   import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
+  import { page } from '$app/state';
   import { authSession } from '$lib/stores/auth.js';
   import { kecamatanList } from '$lib/stores/kecamatan.js';
   import { saveKecamatan, deleteKecamatan } from '$lib/data/kecamatanService.js';
@@ -86,6 +87,21 @@
         formState.nama = toTitleCase(dist.name);
         formState.kabupaten = toTitleCase(reg.name);
         formState.provinsi = toTitleCase(prov.name);
+      }
+    }
+  });
+
+  // Check URL query parameters for edit target
+  $effect(() => {
+    if (browser && $kecamatanList.length > 0) {
+      const editSlug = page.url.searchParams.get('edit');
+      if (editSlug) {
+        const kec = $kecamatanList.find((k) => k.id === editSlug);
+        if (kec) {
+          selectedMode = 'edit';
+          editTargetId = editSlug;
+          formState = JSON.parse(JSON.stringify(kec));
+        }
       }
     }
   });

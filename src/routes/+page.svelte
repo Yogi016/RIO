@@ -12,7 +12,8 @@
     provinceSummaries,
     topProvinceSummaries,
   } from '$lib/data/indonesiaAreas.js';
-  import { MapPin, Users, Wheat, Database, Building2, Landmark, Layers3 } from '@lucide/svelte';
+  import { MapPin, Users, Wheat, Database, Building2, Landmark, Layers3, Plus } from '@lucide/svelte';
+  import { authSession } from '$lib/stores/auth.js';
 
   /** @type {{ data: { kecamatanList: Array } }} */
   let { data } = $props();
@@ -92,7 +93,15 @@
         </div>
       </div>
       <div>
-        <h1 class="dashboard__title">Dashboard Wilayah Nasional</h1>
+        <div style="display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap; margin-bottom: 2px;">
+          <h1 class="dashboard__title" style="margin-bottom: 0;">Dashboard Wilayah Nasional</h1>
+          {#if $authSession && ($authSession.role === 'admin' || $authSession.role === 'super_admin')}
+            <a href="/admin/input" class="btn-add-kec">
+              <Plus size={14} />
+              <span>Tambah Kecamatan</span>
+            </a>
+          {/if}
+        </div>
         <p class="dashboard__desc">
           Pemantauan potensi wilayah Indonesia dengan data kecamatan nasional
           dan dummy indikator potensi yang mengikuti struktur publikasi BPS.
@@ -361,6 +370,26 @@
     font-weight: 800;
     letter-spacing: 0;
     color: var(--accent-navy);
+  }
+
+  .btn-add-kec {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: var(--accent-green);
+    color: white;
+    font-size: 0.76rem;
+    font-weight: 800;
+    padding: 0.38rem 0.78rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 10px hsla(152, 72%, 27%, 0.16);
+    transition: all var(--transition-fast);
+  }
+
+  .btn-add-kec:hover {
+    background: hsl(152, 72%, 23%);
+    box-shadow: 0 6px 14px hsla(152, 72%, 27%, 0.24);
+    transform: translateY(-1px);
   }
 
   .dashboard__desc {
