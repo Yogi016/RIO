@@ -82,6 +82,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    height: 100%;
     min-height: 430px;
   }
 
@@ -118,7 +119,8 @@
   }
 
   .map-card__canvas {
-    height: 360px;
+    flex: 1;
+    min-height: 360px;
     width: 100%;
     background: hsl(210, 31%, 96%);
     z-index: 0;
@@ -154,7 +156,7 @@
     }
 
     .map-card__canvas {
-      height: 300px;
+      min-height: 300px;
     }
   }
 </style>
