@@ -18,6 +18,11 @@
     MapPin,
     AlertCircle
   } from '@lucide/svelte';
+  import { 
+    indonesiaProvinces, 
+    indonesiaRegencies, 
+    indonesiaDistricts 
+  } from '$lib/data/indonesiaAreas.js';
 
   // --- Route Guard ---
   $effect(() => {
@@ -35,6 +40,55 @@
   let activeTab = $state('identitas'); // identitas, penduduk, pertanian, perkebunan, peternakan
   let saveStatus = $state(''); // 'success', 'error', 'saving', atau ''
   let errorMessage = $state('');
+
+  // --- BPS Cascaded Selection ---
+  let selectedProvinceCode = $state('');
+  let selectedRegencyCode = $state('');
+  let selectedDistrictCode = $state('');
+
+  const toTitleCase = (str) => {
+    if (!str) return '';
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  const provincesList = $derived(
+    [...indonesiaProvinces].sort((a, b) => a.name.localeCompare(b.name))
+  );
+
+  const regenciesList = $derived(
+    selectedProvinceCode
+      ? [...indonesiaRegencies]
+          .filter((r) => r.province_code === selectedProvinceCode)
+          .sort((a, b) => a.name.localeCompare(b.name))
+      : []
+  );
+
+  const districtsList = $derived(
+    selectedRegencyCode
+      ? [...indonesiaDistricts]
+          .filter((d) => d.regency_code === selectedRegencyCode)
+          .sort((a, b) => a.name.localeCompare(b.name))
+      : []
+  );
+
+  // Auto-populate when district is selected
+  $effect(() => {
+    if (selectedDistrictCode) {
+      const dist = indonesiaDistricts.find((d) => d.code === selectedDistrictCode);
+      const reg = indonesiaRegencies.find((r) => r.code === selectedRegencyCode);
+      const prov = indonesiaProvinces.find((p) => p.code === selectedProvinceCode);
+
+      if (dist && reg && prov) {
+        formState.nama = toTitleCase(dist.name);
+        formState.kabupaten = toTitleCase(reg.name);
+        formState.provinsi = toTitleCase(prov.name);
+      }
+    }
+  });
 
   // Default values
   const defaultPertanian = [
@@ -382,6 +436,47 @@
         <div class="tab-pane animate-fade-in">
           <h3 class="tab-pane__title">Identitas Wilayah & Administrasi</h3>
           
+          {#if selectedMode === 'new'}
+            <div class="bps-helper glass-card">
+              <h4 class="bps-helper__title">
+                <Database size={16} />
+                <span>Pilih dari Wilayah Resmi Indonesia (BPS)</span>
+              </h4>
+              <p class="bps-helper__desc">Pilih provinsi, kabupaten, dan kecamatan untuk mengisi otomatis kolom identitas wilayah.</p>
+              <div class="bps-helper__grid">
+                <label>
+                  <span>Provinsi</span>
+                  <select bind:value={selectedProvinceCode} onchange={() => { selectedRegencyCode = ''; selectedDistrictCode = ''; }}>
+                    <option value="">-- Pilih Provinsi --</option>
+                    {#each provincesList as prov}
+                      <option value={prov.code}>{toTitleCase(prov.name)}</option>
+                    {/each}
+                  </select>
+                </label>
+
+                <label>
+                  <span>Kabupaten / Kota</span>
+                  <select bind:value={selectedRegencyCode} onchange={() => selectedDistrictCode = ''} disabled={!selectedProvinceCode}>
+                    <option value="">-- Pilih Kabupaten/Kota --</option>
+                    {#each regenciesList as reg}
+                      <option value={reg.code}>{toTitleCase(reg.name)}</option>
+                    {/each}
+                  </select>
+                </label>
+
+                <label>
+                  <span>Kecamatan</span>
+                  <select bind:value={selectedDistrictCode} disabled={!selectedRegencyCode}>
+                    <option value="">-- Pilih Kecamatan --</option>
+                    {#each districtsList as dist}
+                      <option value={dist.code}>{toTitleCase(dist.name)}</option>
+                    {/each}
+                  </select>
+                </label>
+              </div>
+            </div>
+          {/if}
+          
           <div class="form-grid">
             <label>
               <span>Nama Kecamatan *</span>
@@ -696,6 +791,76 @@
 </div>
 
 <style>
+  .bps-helper {
+    background: hsl(210, 40%, 99%);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .bps-helper__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--accent-navy);
+    font-size: 0.95rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .bps-helper__desc {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .bps-helper__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-xs);
+  }
+
+  .bps-helper__grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .bps-helper__grid span {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+
+  .bps-helper__grid select {
+    height: 42px;
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: 0 0.8rem;
+    font: inherit;
+    font-size: 0.88rem;
+    background: white;
+    outline: none;
+    transition: border var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .bps-helper__grid select:focus {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px var(--accent-green-soft);
+  }
+
+  .bps-helper__grid select:disabled {
+    background: hsl(210, 20%, 94%);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+  }
+
   .input-page {
     max-width: 1100px;
     margin: 0 auto;
